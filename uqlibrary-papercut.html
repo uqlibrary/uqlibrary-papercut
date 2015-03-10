@@ -118,9 +118,9 @@ Element providing an overview for current papercut balance
 
         this.$.account.addEventListener('uqlibrary-api-account-loaded', function(e) {
           if (e.detail.hasSession) {
-            if(e.detail.classes) {
-              that.user = e.detail;
-            }
+            that.user = e.detail;
+          } else {
+            that.$.account.login(document.location.href);
           }
         });
 
