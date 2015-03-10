@@ -1,0 +1,152 @@
+<!--
+Element providing an overview for current papercut balance
+
+##### Example
+
+    <uqlibrary-papercut></uqlibrary-papercut>
+
+    <script>
+    (function () {
+
+      window.addEventListener('polymer-ready', function() {
+
+        var papercut = document.querySelector('uqlibrary-papercut');
+
+        papercut.papercut = [
+
+          ];
+      });
+    }());
+  </script>
+
+@element uqlibrary-papercut
+@blurb Element providing an overview for current libraries working papercut
+@status alpha
+@homepage http://uqlibrary.github.io/uqlibrary-papercut
+-->
+
+<link rel="import" href="../uqlibrary-elements/0.5.4/lib/vulcanized.html">
+
+<polymer-element name="uqlibrary-papercut" layout center attributes="papercut autoload">
+  <template>
+    <link rel="stylesheet" href="../uqlibrary-elements/resources/theme/element.css">
+    <uqlibrary-api-account id="account"></uqlibrary-api-account>
+    <uqlibrary-api-papercut id="papercutApi"></uqlibrary-api-papercut>
+    <uqlibrary-ga id="ga" appName="papercut"></uqlibrary-ga>
+
+    <core-drawer-panel id="drawerPanel" class="drawer" drawerWidth="256px" responsiveWidth="768px">
+      <core-header-panel drawer>
+        <uqlibrary-menu account="{{user}}"></uqlibrary-menu>
+      </core-header-panel>
+
+      <core-header-panel main class="main">
+        <core-toolbar>
+
+          <core-a11y-keys id="a11yToolBarLeftButton" target="{{$.toolBarLeftButton}}" keys="{{keyboardNavigationKeys}}"
+                          on-keys-pressed="{{ a11yKeyPressed }}"></core-a11y-keys>
+          <paper-icon-button id="toolBarLeftButton" icon="menu" core-drawer-toggle></paper-icon-button>
+          <h1 flex id="toolbar-page-title">Library Printing</h1>
+
+        </core-toolbar>
+        <div id="content" class="body-footer-container">
+          <div class="card" z="1">
+            <div class="subhead cardSection cardTitle">Current Printing Balance:  ${{papercut.balance}}
+              <div class="caption">
+                Last update: {{retrievedAt}}
+              </div>
+            </div>
+
+            <div class="subhead cardSection cardTitle">
+              Online Top-up
+              <div horizontal layout around-justified wrap>
+                <template repeat="{{ topUpValues as value }}">
+                  <paper-button class="topUpButton" value="{{value}}" raised on-tap="{{topUpClicked}}">
+                    <a target="_blank" href="{{paymentSystemBaseUrl}}&UQ_LIB_TMS_Card_No={{papercut.cardNumber}}&UnitAmountIncTax={{value}}&EMAIL={{papercut.email}}">
+                      ${{value}}
+                    </a>
+                  </paper-button>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+        <uqlibrary-persistent-footer id="persistentFooter">
+          <div class="footerButtons" layout horizontal end-justified>
+            <paper-button on-tap="{{papercutAppClicked}}"><a target="_blank" href="{{papercutAppUrl}}">Login to Papercut</a></paper-button>
+          </div>
+        </uqlibrary-persistent-footer>
+
+
+      </core-header-panel>
+
+    </core-drawer-panel>
+
+  </template>
+
+  <script>
+    Polymer('uqlibrary-papercut', {
+      // Accessibility issues fixes
+
+      keyboardNavigationKeys: 'space enter',
+
+      a11yKeyPressed: function(source, event) {
+        if (source.path && source.path.length > 0 && source.path[0].target) {
+          source.path[0].target.fire("tap");
+        }
+      },
+
+      /**
+       * The `papercut` attribute contains information about papercut
+       *
+       * @property papercut
+       * @type Object
+       */
+
+      publish: {
+        papercut: null,
+        autoload: true
+      },
+      user: {},
+      papercutAppUrl: 'https://lib-print.library.uq.edu.au:9192',
+      paymentSystemBaseUrl: 'https://payments.uq.edu.au/OneStopWeb/aspx/TranAdd.aspx?TRAN-TYPE=W360',
+      topUpValues: [5, 10, 20, 50],
+      retrievedAt: '',
+
+
+      ready: function() {
+        var that = this;
+
+        this.$.account.addEventListener('uqlibrary-api-account-loaded', function(e) {
+          if (e.detail.hasSession) {
+            if(e.detail.classes) {
+              that.user = e.detail;
+            }
+          }
+        });
+
+        this.$.papercutApi.addEventListener('uqlibrary-api-papercut-loaded', function(e) {
+          that.papercut = e.detail;
+        });
+        if(this.autoload){
+          this.$.account.get();
+          this.$.papercutApi.get();
+        }
+      },
+
+
+      papercutChanged: function() {
+        this.retrievedAt = moment(this.papercut.retrievedAt).fromNow();
+        this.fire('uqlibrary-papercut-loaded');
+      },
+
+      papercutAppClicked: function() {
+        this.$.ga.addEvent('Log in to Papercut click');
+      },
+      topUpClicked: function(e, data, sender) {
+        this.$.ga.addEvent('Top-up click', sender.getAttribute('value'));
+      }
+
+    });
+  </script>
+
+</polymer-element>
