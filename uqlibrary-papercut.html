@@ -57,14 +57,16 @@ Element providing an overview for current papercut balance
             </div>
               <br>
             <div class="subhead cardSection cardTitle">
-              Online Top-up
+              <div>Online Top-up</div>
               <div horizontal layout around-justified wrap>
                 <template repeat="{{ topUpValues as value }}">
-                  <paper-button class="topUpButton" value="{{value}}" raised on-tap="{{topUpClicked}}">
-                    <a target="_blank" href="{{paymentSystemBaseUrl}}&UQ_LIB_TMS_Card_No={{papercut.cardNumber}}&UnitAmountIncTax={{value}}&EMAIL={{papercut.email}}">
-                      ${{value}}
-                    </a>
-                  </paper-button>
+                  <div class="text-container">
+                    <paper-button class="topUpButton" value="{{value}}" raised on-tap="{{topUpClicked}}">
+                      <a target="_blank" href="{{paymentSystemBaseUrl}}&UQ_LIB_TMS_Card_No={{papercut.cardNumber}}&UnitAmountIncTax={{value}}&EMAIL={{papercut.email}}">
+                        ${{value}}
+                      </a>
+                    </paper-button>
+                  </div>
                 </template>
               </div>
             </div>
