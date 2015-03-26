@@ -58,7 +58,10 @@ Element providing an overview for current papercut balance
               <br>
             <div class="subhead cardSection cardTitle">
               <div>Online Top-up</div>
-              <div horizontal layout around-justified wrap>
+                <div class="caption">
+                    Choose an amount to add money to your printing balance:
+                </div>
+              <div horizontal layout wrap width="2000px">
                 <template repeat="{{ topUpValues as value }}">
                   <div class="text-container">
                     <paper-button class="topUpButton" value="{{value}}" raised on-tap="{{topUpClicked}}">
