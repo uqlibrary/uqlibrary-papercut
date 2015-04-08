@@ -50,28 +50,31 @@ Element providing an overview for current papercut balance
         </core-toolbar>
         <div id="content" class="body-footer-container">
           <div class="responsiveCard" z="1">
-            <div class="subhead cardSection cardTitle">Current Printing Balance:  ${{papercut.balance}}
+            <div class="subhead cardSection">
+              <div class="cardTitle">
+                Current Printing Balance:  ${{papercut.balance}}
+              </div>
               <div class="caption">
                 Last update: {{retrievedAt}}
               </div>
             </div>
               <br>
-            <div class="subhead cardSection cardTitle">
-              <div>Online Top-up</div>
-                <div class="caption">
-                    Choose an amount to add money to your printing balance:
-                </div>
-              <div horizontal layout wrap width="2000px">
+            <div class="subhead cardSection">
+              <div class="cardTitle">Online Top-up</div>
+              <div class="caption">
+                  Choose an amount to add money to your printing balance:
+              </div>
+
+              <div horizontal layout wrap justified>
                 <template repeat="{{ topUpValues as value }}">
-                  <div class="text-container">
-                    <paper-button class="topUpButton" value="{{value}}" raised on-tap="{{topUpClicked}}">
-                      <a target="_blank" href="{{paymentSystemBaseUrl}}&UQ_LIB_TMS_Card_No={{papercut.cardNumber}}&UnitAmountIncTax={{value}}&EMAIL={{papercut.email}}">
-                        ${{value}}
-                      </a>
-                    </paper-button>
-                  </div>
+                  <paper-button class="topUpButton" value="{{value}}" raised on-tap="{{topUpClicked}}">
+                    <a target="_blank" href="{{paymentSystemBaseUrl}}&UQ_LIB_TMS_Card_No={{papercut.cardNumber}}&UnitAmountIncTax={{value}}&EMAIL={{papercut.email}}">
+                      ${{value}}
+                    </a>
+                  </paper-button>
                 </template>
               </div>
+
             </div>
           </div>
         </div>
