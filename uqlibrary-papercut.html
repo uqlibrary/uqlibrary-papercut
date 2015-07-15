@@ -49,21 +49,25 @@ Element providing an overview for current papercut balance
 
         </core-toolbar>
         <div id="content" class="body-footer-container">
-          <div class="responsiveCard" z="1">
-            <div class="subhead cardSection">
-              <div class="cardTitle">
+          <paper-shadow class="card" z="1">
+            <div class="cardSection noBorder">
+              <div class="subhead cardTitle">
                 Current Printing Balance:  ${{papercut.balance}}
               </div>
-              <div class="caption">
-                Last update: {{retrievedAt}}
+              <div class="caption ">
+                Last updated: {{retrievedAt}}
               </div>
             </div>
-              <br>
-            <div class="subhead cardSection">
-              <div class="cardTitle">Online Top-up</div>
-              <div class="caption">
-                  Choose an amount to add money to your printing balance:
-              </div>
+
+            <div class="cardSection noBorder">
+
+            <div class="subhead cardTitle">
+              Online Top-up
+            </div>
+
+            <div class="caption">
+              Choose an amount to add money to your printing balance:
+            </div>
 
               <div horizontal layout wrap justified>
                 <template repeat="{{ topUpValues as value }}">
@@ -74,8 +78,9 @@ Element providing an overview for current papercut balance
                   </paper-button>
                 </template>
               </div>
-
             </div>
+
+          </paper-shadow>
           </div>
         </div>
         <uqlibrary-persistent-footer id="persistentFooter">
