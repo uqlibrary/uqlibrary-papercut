@@ -9,8 +9,8 @@ if [ ${CI_BRANCH} != "polymer1.0" ]; then
     cd ../uqlibrary-papercut
     ../uqlibrary-elements/bin/sauce.sh
 else
-    # Only run if not GH-PAGES
-    if [ ${CI_BRANCH} != "gh-pages" ] && [ ${PIPE_NUM} == "1" ]; then
+    # Only run if branch is Polymer
+    if [ ${CI_BRANCH} == "polymer1.0" ] && [ ${PIPE_NUM} == "1" ]; then
         # Run local tests
         echo "Starting local WCT tests"
         bower install
