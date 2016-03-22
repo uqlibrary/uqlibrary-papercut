@@ -1,0 +1,95 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-papercut>` is a sample element of how UQ library apps should be structured
+
+Example:
+    <uqlibrary-papercut></uqlibrary-papercut>
+
+@demo
+
+@demo demo/index.html Demo of the Full view
+-->
+<dom-module id="uqlibrary-papercut">
+  <!-- All element styles -->
+  <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
+    :host {
+      @apply(--uql-app-host);
+    }
+
+    .container {
+      padding: 40px;
+
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+    }
+
+    .button-container {
+      @apply(--layout-horizontal);
+      @apply(--layout-around-justified);
+    }
+
+    paper-card {
+      padding: 20px;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .body1 {
+      color: var(--secondary-color);
+    }
+  </style>
+
+  <!-- Template -->
+  <template>
+    <uqlibrary-api-papercut id="papercutApi"></uqlibrary-api-papercut>
+    <uqlibrary-ga id="ga" appName="papercut"></uqlibrary-ga>
+
+    <div class="fit layout vertical">
+      <paper-header-panel class="flex">
+        <!-- Header -->
+        <paper-toolbar>
+          <!-- Required -->
+          <template is="dom-if" if="{{!standAlone}}">
+            <paper-icon-button icon="menu" on-tap="_toggleDrawerPanel" paper-drawer-toggle></paper-icon-button>
+          </template>
+          <div class="title uqlibrary-app-title">Library Printing</div>
+        </paper-toolbar>
+        <!-- Content -->
+        <div class="fit">
+          <div class="container">
+            <paper-card elevation="2">
+              <!-- Current printing balance -->
+              <div class="headline">Current Printing Balance: $[[_paperCut.balance]]</div>
+              <div class="body1">Last updated: [[_retrievedAt]]</div>
+
+              <br /><br />
+
+              <!-- Top up text -->
+              <div class="headline">Online Top-up</div>
+              <div class="body1">Choose an amount to add money to your printing balance:</div>
+
+              <br /><br />
+
+              <div class="button-container">
+                <template is="dom-repeat" items="[[_topUpValues]]">
+                  <paper-button class="button-colored-accent body2" on-tap="_topUp">$[[item]]</paper-button>
+                </template>
+              </div>
+
+              <!-- Top up buttons -->
+            </paper-card>
+          </div>
+        </div>
+      </paper-header-panel>
+      <!-- Bottom footer -->
+      <paper-toolbar class="uqlibrary-app-footer right">
+        <paper-button class="button-colored-accent" on-tap="_openPaperCut">Login to papercut</paper-button>
+      </paper-toolbar>
+    </div>
+
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-papercut.js"></script>
+</dom-module>
