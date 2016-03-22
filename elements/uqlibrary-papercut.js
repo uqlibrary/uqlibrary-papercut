@@ -39,7 +39,8 @@
 			 * Holds the PaperCut API data
 			 */
 			_paperCut: {
-				type: Object
+				type: Object,
+				observer: '_paperCutChanged'
 			},
 			/**
 			 * Holds the "Retrieved xx minutes from now" string
@@ -60,13 +61,19 @@
 
 			this.$.papercutApi.addEventListener('uqlibrary-api-papercut-loaded', function(e) {
 				self._paperCut = e.detail;
-				self._retrievedAt = moment(this.papercut.retrievedAt).fromNow();
-				self.fire('uqlibrary-papercut-loaded');
 			});
 
 			if (this.autoLoad){
 				this.$.papercutApi.get();
 			}
+		},
+		/**
+		 * Called whenever the PaperCut data is changed
+		 * @private
+     */
+		_paperCutChanged: function () {
+			this._retrievedAt = moment(this._paperCut.retrievedAt).fromNow();
+			this.fire('uqlibrary-papercut-loaded');
 		},
 		/**
 		 * Toggles the drawer panel of the main UQL app

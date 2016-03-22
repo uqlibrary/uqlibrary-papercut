@@ -1,59 +1,49 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
-  <title>uqlibrary-papercut-integration</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>uqlibrary-element</title>
 
-  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <script src="../bower_components/web-component-tester/browser.js"></script>
+  <script src="../bower_components/test-fixture/test-fixture-mocha.js"></script>
+  <link rel="import" href="../bower_components/test-fixture/test-fixture.html">
 
-  <link rel="import" href="../uqlibrary-papercut.html">
+  <!-- Import the element to test -->
+  <link rel="import" href="../elements/uqlibrary-papercut.html">
+
 </head>
 <body>
 
-<uqlibrary-papercut autoload="false"></uqlibrary-papercut>
+<test-fixture id="element">
+  <template>
+    <uqlibrary-papercut stand-alone="true" auto-load="false"></uqlibrary-papercut>
+  </template>
+</test-fixture>
 
 <script>
-  window.addEventListener('polymer-ready', function() {
+  suite('<uqlibrary-papercut> tests', function () {
+    var element;
 
-    var papercutEl = document.querySelector('uqlibrary-papercut');
-    papercutEl.$.papercutApi.$.papercut.useMockData = true;
-
-    describe('uqlibrary-papercut', function () {
-      before(function () {
-
-      });
-
-      describe('uqlibrary-papercut-balance', function() {
-
-        it('should display papercut balance', function(done) {
-
-          papercutEl.addEventListener('uqlibrary-papercut-loaded', function(){
-            //wait 2 seconds until data is loaded
-            setTimeout(function() {
-                var _papercut = papercutEl.papercut;
-                var apiData = papercutEl.$.papercutApi.papercut;
-                expect(_papercut.balance).to.be.equal(apiData.balance);
-                expect(_papercut.cardNumber).to.be.equal(apiData.cardNumber);
-                expect(_papercut.email).to.be.equal(apiData.email);
-                expect(_papercut.retrievedAt).to.be.equal(apiData.retrievedAt);
-                expect(papercutEl.retrievedAt).to.be.equal(moment(apiData.retrievedAt).fromNow());
-
-                var buttons = papercutEl.shadowRoot.querySelectorAll('paper-button.topUpButton');
-                expect(buttons.length).not.to.be.null;
-                expect(buttons.length).to.be.equal(papercutEl.topUpValues.length);
-                done();
-
-            }, 2000);
-          });
-
-          papercutEl.$.papercutApi.get();
-        });
-      });
-
+    setup(function () {
+      element = fixture('element');
     });
 
+    test('It should show the proper papercut balance', function(done) {
+      element.addEventListener('uqlibrary-papercut-loaded', function(){
+        var _papercut = element._paperCut;
+        var apiData = element.$.papercutApi.papercut;
+        expect(_papercut.balance).to.be.equal(apiData.balance);
+        expect(_papercut.cardNumber).to.be.equal(apiData.cardNumber);
+        expect(_papercut.email).to.be.equal(apiData.email);
+        expect(_papercut.retrievedAt).to.be.equal(apiData.retrievedAt);
+        expect(element._retrievedAt).to.be.equal(moment(apiData.retrievedAt).fromNow());
+
+        done();
+      });
+
+      element.$.papercutApi.get();
+    });
   });
 </script>
 
