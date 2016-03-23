@@ -54,6 +54,14 @@
 			_topUpBaseUrl: {
 				type: String,
 				value: 'https://payments.uq.edu.au/OneStopWeb/aspx/TranAdd.aspx?TRAN-TYPE=W360'
+			},
+
+			/**
+			 * header title - application name
+			 */
+			headerTitle: {
+				type: String,
+				value: 'Printing'
 			}
 		},
 		ready: function () {

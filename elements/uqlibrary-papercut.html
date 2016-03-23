@@ -19,20 +19,23 @@ Example:
 
     .container {
       padding: 40px;
-
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
     }
 
-    .button-container {
+    .card-actions {
       @apply(--layout-horizontal);
       @apply(--layout-around-justified);
     }
 
     paper-card {
-      padding: 20px;
       max-width: 800px;
       width: 100%;
+    }
+
+    .card-actions {
+      border-top: none;
+      padding-bottom:16px;
     }
 
     .body1 {
@@ -43,7 +46,7 @@ Example:
   <!-- Template -->
   <template>
     <uqlibrary-api-papercut id="papercutApi"></uqlibrary-api-papercut>
-    <uqlibrary-ga id="ga" appName="papercut"></uqlibrary-ga>
+    <uqlibrary-ga id="ga" app-name="papercut"></uqlibrary-ga>
 
     <div class="fit layout vertical">
       <paper-header-panel class="flex">
@@ -51,36 +54,41 @@ Example:
         <paper-toolbar>
           <!-- Required -->
           <template is="dom-if" if="{{!standAlone}}">
-            <paper-icon-button icon="menu" on-tap="_toggleDrawerPanel" paper-drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="menu" on-tap="_toggleDrawerPanel" paper-drawer-toggle title="open menu button" aria-label="open menu button"></paper-icon-button>
           </template>
-          <div class="title uqlibrary-app-title">Library Printing</div>
+
+          <div class="title uqlibrary-app-title" title="[[headerTitle]]">[[headerTitle]]</div>
+
         </paper-toolbar>
+
         <!-- Content -->
-        <div class="fit">
-          <div class="container">
-            <paper-card elevation="2">
+        <div class="container">
+            <paper-card>
               <!-- Current printing balance -->
-              <div class="headline">Current Printing Balance: $[[_paperCut.balance]]</div>
-              <div class="body1">Last updated: [[_retrievedAt]]</div>
+              <div class="card-content">
 
-              <br /><br />
+                <div class="headline">Current printing balance: $[[_paperCut.balance]]</div>
+                <div class="body1">Last updated: [[_retrievedAt]]</div>
 
-              <!-- Top up text -->
-              <div class="headline">Online Top-up</div>
-              <div class="body1">Choose an amount to add money to your printing balance:</div>
+                <br /><br />
 
-              <br /><br />
+                <!-- Top up text -->
+                <div class="headline">Online top-up</div>
+                <div class="body1">Choose an amount to add money to your printing balance:</div>
 
-              <div class="button-container">
+              </div>
+
+              <div class="card-actions">
                 <template is="dom-repeat" items="[[_topUpValues]]">
-                  <paper-button class="button-colored-accent body2" on-tap="_topUp">$[[item]]</paper-button>
+                  <paper-button class="button-colored-accent" title="add $[[item]] to your printing balance"
+                                aria-label="add $[[item]] to your printing balance" on-tap="_topUp">$[[item]]</paper-button>
                 </template>
               </div>
 
               <!-- Top up buttons -->
             </paper-card>
-          </div>
         </div>
+
       </paper-header-panel>
       <!-- Bottom footer -->
       <paper-toolbar class="uqlibrary-app-footer right">
