@@ -1,5 +1,5 @@
-uqlibrary-papercut.
+uqlibrary-borrowing.
 ================
 
-See the [component page](http://uqlibrary.github.io/uqlibrary-papercut) for more information.
+See the [component page](http://uqlibrary.github.io/uqlibrary-borrowing) for more information.
 
