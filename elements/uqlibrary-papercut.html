@@ -18,14 +18,15 @@ Example:
     }
 
     .container {
-      padding: 40px;
+      padding: 16px;
       @apply(--layout-horizontal);
       @apply(--layout-center-justified);
     }
 
     .card-actions {
-      @apply(--layout-horizontal);
+      @apply(--layout-horizontal-wrap);
       @apply(--layout-around-justified);
+      @apply(--layout-wrap);
     }
 
     paper-card {
@@ -36,6 +37,10 @@ Example:
     .card-actions {
       border-top: none;
       padding-bottom:16px;
+    }
+
+    .card-actions paper-button {
+      margin-bottom:16px;
     }
 
     .body1 {
