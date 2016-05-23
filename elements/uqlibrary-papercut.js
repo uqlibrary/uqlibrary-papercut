@@ -61,7 +61,14 @@
 			 */
 			headerTitle: {
 				type: String,
-				value: 'Printing'
+				value: 'Printing balance'
+			},
+			/**
+			 * Login button text
+			 */
+			loginBtnText: {
+				type: String,
+				value: 'Login to print account'
 			}
 		},
 		ready: function () {
