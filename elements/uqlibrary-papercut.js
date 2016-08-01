@@ -103,7 +103,7 @@
      */
 		_openPaperCut: function () {
 			this.$.ga.addEvent('Log in to Papercut click');
-			window.open(this._papercutUrl, '_blank');
+			window.location.href = this._papercutUrl;
 		},
 		/**
 		 * Redirects the user to the top up page with the given value
@@ -115,7 +115,7 @@
 			var url = this._topUpBaseUrl + '&UQ_LIB_TMS_Card_No=' + this._paperCut.cardNumber;
 			url += '&UnitAmountIncTax=' + e.model.item + '&EMAIL=' + this._paperCut.email;
 
-			window.open(url, '_blank');
+			window.location.href = url;
 		}
 	})
 })();
