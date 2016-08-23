@@ -49,6 +49,30 @@
 
       element._paperCut = papercut;
     });
+
+    test('It should handle api error', function(done) {
+      element.addEventListener('uqlibrary-papercut-loaded', function(){
+
+        setTimeout(function(){
+          var sources = element.querySelector('.card-content .headline');
+
+          expect(sources.textContent).to.be.equal('Printing balance is currently unavailable.');
+          expect(sources).to.be.visible;
+
+          var actions = element.querySelector('.card-actions');
+          expect(actions).to.be.null;
+
+          var text = element.querySelector('.body1');
+          expect(text).to.be.null;
+
+          done();
+
+        }, 100);
+
+      });
+
+      element._paperCut = 'Error loading data';
+    });
   });
 </script>
 

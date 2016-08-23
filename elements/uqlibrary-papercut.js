@@ -87,7 +87,9 @@
 		 * @private
      */
 		_paperCutChanged: function () {
-			this._retrievedAt = moment(this._paperCut.retrievedAt).fromNow();
+			if (this._paperCut.retrievedAt) {
+				this._retrievedAt = moment(this._paperCut.retrievedAt).fromNow();
+			}
 			this.fire('uqlibrary-papercut-loaded');
 		},
 		/**

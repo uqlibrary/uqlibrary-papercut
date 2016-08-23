@@ -68,6 +68,7 @@ Example:
 
         <!-- Content -->
         <div class="container">
+          <template is="dom-if" if="{{_paperCut.balance}}">
             <paper-card>
               <!-- Current printing balance -->
               <div class="card-content">
@@ -92,6 +93,15 @@ Example:
 
               <!-- Top up buttons -->
             </paper-card>
+          </template>
+          <template is="dom-if" if="{{!_paperCut.balance}}">
+            <paper-card>
+              <!-- Display Error Message -->
+              <div class="card-content">
+                <div class="headline">Printing balance is currently unavailable.</div>
+              </div>
+            </paper-card>
+          </template>
         </div>
 
       </paper-header-panel>
