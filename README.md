@@ -1,5 +1,8 @@
 # uqlibrary-papercut
 
+[![Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-courses.svg)](https://david-dm.org/uqlibrary/uqlibrary-courses)
+[![Dev Dependency Status](https://david-dm.org/uqlibrary/uqlibrary-courses/dev-status.svg)](https://david-dm.org/uqlibrary/uqlibrary-courses?type=dev)
+
 uqlibrary-papercut displays printing balance of the user
 
 Example of full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uqlibrary-papercut).
