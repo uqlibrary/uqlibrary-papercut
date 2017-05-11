@@ -53,7 +53,7 @@
 			 */
 			_topUpBaseUrl: {
 				type: String,
-				value: 'https://payments.uq.edu.au/OneStopWeb/aspx/TranAdd.aspx?TRAN-TYPE=W360'
+				value: 'https://payments.uq.edu.au/OneStopWeb/aspx/TranAdd.aspx?TRAN-TYPE=W361'
 			},
 
 			/**
@@ -114,8 +114,12 @@
      */
 		_topUp: function (e) {
 			this.$.ga.addEvent('Top-up click', e.model.item);
-			var url = this._topUpBaseUrl + '&UQ_LIB_TMS_Card_No=' + ((typeof(this._paperCut.cardNumber) !== 'undefined' && this._paperCut.cardNumber !== null) ? this._paperCut.cardNumber : '');
-			url += '&UnitAmountIncTax=' + e.model.item + '&EMAIL=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
+			var url = this._topUpBaseUrl;
+			url += '&Username=' + ((typeof(this._paperCut.username) !== 'undefined' && this._paperCut.username !== null) ? this._paperCut.username : '');
+            url += 'UnitAmountIncTax=' + e.model.item;
+            url += 'EMAIL=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
+
+			//url += '&UnitAmountIncTax=' + e.model.item + '&EMAIL=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
 
 			window.location.href = url;
 		}
