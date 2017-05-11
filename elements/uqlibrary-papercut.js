@@ -115,11 +115,9 @@
 		_topUp: function (e) {
 			this.$.ga.addEvent('Top-up click', e.model.item);
 			var url = this._topUpBaseUrl;
-			url += '&Username=' + ((typeof(this._paperCut.username) !== 'undefined' && this._paperCut.username !== null) ? this._paperCut.username : '');
-            url += 'UnitAmountIncTax=' + e.model.item;
-            url += 'EMAIL=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
-
-			//url += '&UnitAmountIncTax=' + e.model.item + '&EMAIL=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
+			url += '&Username=' + ((typeof(this._paperCut.id) !== 'undefined' && this._paperCut.id !== null) ? this._paperCut.id : '');
+            url += '&UnitAmountIncTax=' + e.model.item;
+            url += '&EMAIL=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
 
 			window.location.href = url;
 		}
