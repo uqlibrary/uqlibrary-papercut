@@ -88,11 +88,11 @@
                 this.$.papercutApi.get();
             }
 
-            this.$.account.addEventListener('uqlibrary-api-account-loaded', function (e) {
-                self._account = e.detail
+            this.$.accountApi.addEventListener('uqlibrary-api-account-loaded', function (e) {
+                self._account = e.detail;
             });
 
-            this.$.account.get()
+            this.$.accountApi.get();
         },
         /**
          * Called whenever the PaperCut data is changed
@@ -127,7 +127,7 @@
         _topUp: function (e) {
             this.$.ga.addEvent('Top-up click', e.model.item);
             var url = this._topUpBaseUrl;
-            url += '&username=' + ((typeof(this.account.id) !== 'undefined' && this.account.id !== null) ? this.account.id : '');
+            url += '&username=' + ((typeof(this._account.id) !== 'undefined' && this._account.id !== null) ? this._account.id : '');
             url += '&unitamountinctax=' + e.model.item;
             url += '&email=' + ((typeof(this._paperCut.email) !== 'undefined' && this._paperCut.email !== null) ? this._paperCut.email : '');
 
