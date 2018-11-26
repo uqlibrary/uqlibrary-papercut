@@ -11,45 +11,45 @@ Example:
 @demo demo/index.html Demo of the Full view
 -->
 <dom-module id="uqlibrary-papercut">
-  <!-- All element styles -->
-  <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
-    :host {
-      @apply(--uql-app-host);
-    }
-
-    .container {
-      padding: 16px;
-      @apply(--layout-horizontal);
-      @apply(--layout-center-justified);
-    }
-
-    .card-actions {
-      @apply(--layout-horizontal);
-      @apply(--layout-around-justified);
-      @apply(--layout-wrap);
-    }
-
-    paper-card {
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .card-actions {
-      border-top: none;
-      padding-bottom:16px;
-    }
-
-    .card-actions paper-button {
-      margin-bottom:16px;
-    }
-
-    .body1 {
-      color: var(--secondary-color);
-    }
-  </style>
-
   <!-- Template -->
   <template>
+    <!-- All element styles -->
+    <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
+      :host {
+        @apply(--uql-app-host);
+      }
+
+      .container {
+        padding: 16px;
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+      }
+
+      .card-actions {
+        @apply(--layout-horizontal);
+        @apply(--layout-around-justified);
+        @apply(--layout-wrap);
+      }
+
+      paper-card {
+        max-width: 800px;
+        width: 100%;
+      }
+
+      .card-actions {
+        border-top: none;
+        padding-bottom:16px;
+      }
+
+      .card-actions paper-button {
+        margin-bottom:16px;
+      }
+
+      .body1 {
+        color: var(--secondary-color);
+      }
+    </style>
+
     <uqlibrary-api-papercut id="papercutApi"></uqlibrary-api-papercut>
     <uqlibrary-api-account id="accountApi"></uqlibrary-api-account>
     <uqlibrary-ga id="ga" app-name="papercut"></uqlibrary-ga>
