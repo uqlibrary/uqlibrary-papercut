@@ -16,8 +16,7 @@
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga",
     "uqlibrary-api": "uqlibrary/uqlibrary-api",
-    "moment": "^2.12.0",
-    "byutv-jsonp": "^1.3.1"
+    "moment": "^2.12.0"
   },
   "devDependencies": {
     "web-component-tester": "*",
