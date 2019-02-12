@@ -12,7 +12,7 @@ Full documentation can be found at [GitHub Pages](http://uqlibrary.github.io/uql
 Install Node.JS and run the following in the project directory:
 
 ```sh
-npm install -g bower web-component-tester
+npm install -g bower web-component-tester polymer-cli
 npm install
 bower install
 ```
