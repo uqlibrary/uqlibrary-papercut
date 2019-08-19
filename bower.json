@@ -15,8 +15,7 @@
     "polymer": "Polymer/polymer#^1.11.3",
     "uqlibrary-styles": "uqlibrary/uqlibrary-styles",
     "uqlibrary-ga": "uqlibrary/uqlibrary-ga",
-    "uqlibrary-api": "uqlibrary/uqlibrary-api",
-    "moment": "^2.12.0"
+    "uqlibrary-api": "uqlibrary/uqlibrary-api"
   },
   "devDependencies": {
     "web-component-tester": "*",
