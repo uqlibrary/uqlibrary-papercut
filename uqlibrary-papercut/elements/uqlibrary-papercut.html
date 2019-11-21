@@ -1,0 +1,118 @@
+<link rel="import" href="elements.html">
+
+<!--
+`<uqlibrary-papercut>` is a sample element of how UQ library apps should be structured
+
+Example:
+
+    <uqlibrary-papercut></uqlibrary-papercut>
+
+@demo
+-->
+<dom-module id="uqlibrary-papercut">
+  <!-- Template -->
+  <template>
+    <!-- All element styles -->
+    <style is="custom-style" include="iron-flex iron-flex-alignment common-styles">
+      :host {
+        @apply --uql-app-host;
+      }
+
+      .container {
+        padding: 16px;
+        @apply --layout-horizontal;
+        @apply --layout-center-justified;
+      }
+
+      .card-actions {
+        @apply --layout-horizontal;
+        @apply --layout-around-justified;
+        @apply --layout-wrap;
+      }
+
+      paper-card {
+        max-width: 800px;
+        width: 100%;
+      }
+
+      .card-actions {
+        border-top: none;
+        padding-bottom:16px;
+      }
+
+      .card-actions paper-button {
+        margin-bottom:16px;
+      }
+
+      .body1 {
+        color: var(--secondary-color);
+      }
+    </style>
+
+    <uqlibrary-api-papercut id="papercutApi"></uqlibrary-api-papercut>
+    <uqlibrary-api-account id="accountApi"></uqlibrary-api-account>
+    <uqlibrary-ga id="ga" app-name="papercut"></uqlibrary-ga>
+
+    <div class="fit layout vertical">
+      <paper-header-panel class="flex">
+        <!-- Header -->
+        <paper-toolbar>
+          <!-- Required -->
+          <template is="dom-if" if="{{!standAlone}}">
+            <paper-icon-button icon="menu" on-tap="_toggleDrawerPanel" paper-drawer-toggle title="open menu button" aria-label="open menu button"></paper-icon-button>
+          </template>
+
+          <div class="title uqlibrary-app-title" title="[[headerTitle]]">[[headerTitle]]</div>
+
+        </paper-toolbar>
+
+        <!-- Content -->
+        <div class="container">
+          <template is="dom-if" if="{{_paperCut.balance}}">
+            <paper-card>
+              <!-- Current printing balance -->
+              <div class="card-content">
+
+                <div class="headline">Current printing balance: $[[_paperCut.balance]]</div>
+                <div class="body1">Last updated: [[_retrievedAt]]</div>
+
+                <br /><br />
+
+                <!-- Top up text -->
+                <div class="headline">Online top-up</div>
+                <div class="body1">Choose an amount to add money to your printing balance:</div>
+
+              </div>
+
+              <div class="card-actions">
+                <template is="dom-repeat" items="[[_topUpValues]]">
+                  <paper-button class="button-colored-accent" title="add $[[item]] to your printing balance"
+                                aria-label="add $[[item]] to your printing balance" on-tap="_topUp">$[[item]]</paper-button>
+                </template>
+              </div>
+
+              <!-- Top up buttons -->
+            </paper-card>
+          </template>
+          <template is="dom-if" if="{{!_paperCut.balance}}">
+            <paper-card>
+              <!-- Display Error Message -->
+              <div class="card-content">
+                <div class="headline">Printing balance is currently unavailable.</div>
+              </div>
+            </paper-card>
+          </template>
+        </div>
+
+      </paper-header-panel>
+      <!-- Bottom footer -->
+      <paper-toolbar class="uqlibrary-app-footer right">
+        <paper-button class="button-colored-accent" on-tap="_openPaperCut" aria-label$="{{loginBtnText}}">[[loginBtnText]]</paper-button>
+      </paper-toolbar>
+    </div>
+
+  </template>
+
+  <!-- Location of the script -->
+  <script src="uqlibrary-papercut.js"></script>
+</dom-module>
